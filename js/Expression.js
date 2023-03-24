@@ -1,10 +1,4 @@
 /**
- *  此文件主要包含可以通过正则表达式来验证的工具函数
- *  感谢正则表达式作者：铁皮饭盒（https://juejin.im/user/58913fdf8d6d810058206a75）GitHub（https://github.com/any86/any-rule）
- *  最新正则表达式可以参考他的GitHub
- */
-
-/**
  * 验证火车车次
  * @param { string } value
  */
