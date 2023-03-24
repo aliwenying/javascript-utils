@@ -383,3 +383,24 @@ export const isJavaPackage = value => /^([a-zA-Z_][a-zA-Z0-9_]*)+([.][a-zA-Z_][a
  export const nameReg = (value) => {
     return value.match(/^(?![.])[\u4e00-\u9fa5_a-zA-Z0-9-—\(\)\（\）.]+$/g)
   }
+ 
+ /**
+ * 从文本中提取手机号，更新到2023年
+ * @param { string } value
+ */
+ export const nameReg = (value) => {
+  const pattern = /(?<!\d)(1[3-9]\d{9})(?!\d)/g;
+  const matches = chat.match(pattern);
+  if (!matches) {
+    return [];
+  }
+  const validPhoneNumbers = [];
+  for (let i = 0; i < matches.length; i++) {
+    const phoneNumber = matches[i];
+    const isValid = /^1[3-9]\d{9}$/.test(phoneNumber);
+    if (isValid) {
+      validPhoneNumbers.push(phoneNumber);
+    }
+  }
+  return validPhoneNumbers;
+  }
