@@ -201,7 +201,74 @@ export const isLicensePlateNumber = value => /^(?:[京津沪渝冀豫云辽黑�
  * @param { string } value
  */
 export const isMPStrict = value => /^(?:(?:\+|00)86)?1(?:(?:3[\d])|(?:4[5-7|9])|(?:5[0-3|5-9])|(?:6[5-7])|(?:7[0-8])|(?:8[\d])|(?:9[1|8|9]))\d{8}$/g.test(value);
-
+/**
+* 验证严谨的国内手机号，根据工信部2023年最新公布的手机号段
+* @param {string} value
+*/
+export const isValidChinesePhoneNumber=(phoneNumber)=> {
+  const pattern = /^1[3-9]\d{9}$/;
+  if (!pattern.test(phoneNumber)) {
+    return false;
+  }
+  const mobilePatterns = [
+    /^134[0-8]\d{7}$/,
+    /^13[5-9]\d{8}$/,
+    /^147\d{8}$/,
+    /^15[0-2]\d{8}$/,
+    /^15[7-9]\d{8}$/,
+    /^165\d{8}$/,
+    /^17[2-8]\d{8}$/,
+    /^18[2-4]\d{8}$/,
+    /^187\d{8}$/,
+    /^19[58]\d{8}$/,
+    /^198\d{8}$/,
+    /^195\d{8}$/
+  ];
+  const unicomPatterns = [
+    /^13[0-2]\d{8}$/,
+    /^145\d{8}$/,
+    /^15[5-6]\d{8}$/,
+    /^166\d{8}$/,
+    /^17[5-6]\d{8}$/,
+    /^18[5-6]\d{8}$/,
+    /^166\d{8}$/
+  ];
+  const telecomPatterns = [
+    /^133\d{8}$/,
+    /^149\d{8}$/,
+    /^153\d{8}$/,
+    /^162\d{8}$/,
+    /^17[3-7]\d{8}$/,
+    /^18[0-1]\d{8}$/,
+    /^189\d{8}$/,
+    /^199\d{8}$/
+  ];
+  const virtualPatterns = [
+    /^170\d{8}$/,
+    /^171\d{8}$/
+  ];
+  for (let i = 0; i < mobilePatterns.length; i++) {
+    if (mobilePatterns[i].test(phoneNumber)) {
+      return true;
+    }
+  }
+  for (let i = 0; i < unicomPatterns.length; i++) {
+    if (unicomPatterns[i].test(phoneNumber)) {
+      return true;
+    }
+  }
+  for (let i = 0; i < telecomPatterns.length; i++) {
+    if (telecomPatterns[i].test(phoneNumber)) {
+      return true;
+    }
+  }
+  for (let i = 0; i < virtualPatterns.length; i++) {
+if (virtualPatterns[i].test(phoneNumber)) {
+  return true;
+}
+}
+return false;
+}
 /**
  *  验证手机号中国(宽松), 只要是13,14,15,16,17,18,19开头即可
  * @param { string } value
